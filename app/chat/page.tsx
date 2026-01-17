@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/components/auth/AuthContext";
+
+
 
 /* Outline structure for messages */
 interface Message {
@@ -11,14 +14,7 @@ interface Message {
 
 }
 
-interface AuthStatus {
-    authenticated: boolean;
-    user?: {
-        firstName: string;
-        lastName: string;
-        email: string;
-    };
-}
+
 
 export default function Page() {
     //User input 
@@ -30,36 +26,19 @@ export default function Page() {
     //waiting for assistant response (used for thinking graphic)
     const [isLoading, setIsLoading] = useState(false);
 
-    /* Handler for user authentication -- defaults to false*/
-    const [authStatus, setAuthStatus] = useState<AuthStatus>({authenticated: false});
-    const [checkingAuth, setCheckingAuth] = useState(true);
+    const { authStatus } = useAuth();
 
+   
     // store last message to auto jump there when new chats appear
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    //Check authentication status -- run 1x on first open
-    useEffect(() => {
-        checkAuthStatus();
-    }, []);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
     }, [messages]);
 
 
-    async function checkAuthStatus() {
-        try{
-            const res = await fetch("/api/whoop/status");
-            const data = await res.json();
-            setAuthStatus(data);
-        }
-        catch (error) {
-            console.error("Failed to check authentication status: ", error);
-        }
-        finally {
-            setCheckingAuth(false);
-        }
-    }
+   
 
     /* Function handles call & response to AI agent. Stores & sends user message + context window, 
     and returns agents message & adds it to the context window */
@@ -116,47 +95,6 @@ export default function Page() {
 
     return (
         <div className="flex flex-col h-screen bg-stone-900">
-            {/* Header */}
-            <div className="border-b border-stone-700 bg-stone-800 p-4">
-                <div className="max-w-4xl mx-auto flex justify-between items-center">
-                    {/* title TODO: find a more creative name */}
-                    <h1 className="text-white text-xl font-bold"> Sports Psychology Coach</h1>
-                    
-                    {/*  TODO: extract to diff component for readability?
-                    Case 1) if we're already logging user in, have button read checking (and no click
-                    2) if user is logged in, have button change to logout (if click delete cookies reset vars)
-                    3) otherwise, have it as a normal login
-                    */}
-                    {checkingAuth ? (
-                        <Button variant="outline" disabled>
-                            Checking...
-                        </Button>
-                    ): authStatus.authenticated ? ( 
-                        <div className="flex items-center gap-3">
-                            <span className="text-white text-sm">
-                                Hello {authStatus.user?.firstName}!
-                            </span>
-                            <Button
-                                variant="outline"
-                                onClick={() => {
-                                    document.cookie = "whoop_access_token=; Max-Age=0; path=/";
-                                    setAuthStatus({authenticated: false});
-                                }}
-                            >
-                                Log Out
-                            </Button>
-                        </div>
-                    ) : (
-                        <Button
-                            onClick={() => window.location.href = "/api/whoop/auth"}
-                            variant="outline"
-                        >
-                            Connect Whoop
-                        </Button>
-                    )}
-                </div>
-            </div>
-            
             {/* Messages area*/}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {/* If user hasn't connected whoop / hasnt sent first msg*/}
