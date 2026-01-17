@@ -22,7 +22,7 @@ export default function Header() {
                         height={25}
                     />
                 </Link>
-                <h1 className="text-white text-xl font-bold">Sports Psychology Coach</h1>
+                <h1 className="text-white text-xl font-bold">Sports Performance Coach</h1>
             </div>
             
             { /* Login/Logout Button */}

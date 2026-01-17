@@ -14,8 +14,6 @@ interface Message {
 
 }
 
-
-
 export default function Page() {
     //User input 
     const [prompt, setPrompt] = useState("");
@@ -154,7 +152,7 @@ export default function Page() {
                         className="flex-1 bg-stone-700 text-white border-stone-600"
                         placeholder={
                             authStatus.authenticated
-                                ? "Ask your sports psychology coach..."
+                                ? "Ask your sports performance coach..."
                                 : "Connect your Whoop to start chatting..."
                         }
                         value={prompt}
