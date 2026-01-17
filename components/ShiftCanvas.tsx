@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-//used from https://github.com/crnacura/AmbientCanvasBackgrounds by crnacura
+//used from repo AmbientCanvasBgs by crnacura
 //Small changes made for react compatability & color pallette
 
 

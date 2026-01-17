@@ -20,21 +20,20 @@ export default function Home() {
   return (
 
     <div id="app-container">
-
         <div className="relative flex min-h-screen flex-col" id="welcome">
-          {/* Canvas background */}
+          {/* Welcome background */}
           <ShiftCanvas />
           
-          {/* Front page content */}
+          {/* Welcome content */}
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center gap-4">
-            <h1 className="text-4xl font-bold text-white">Welcome to [TITLE]</h1>
-            <p className="text-stone-200">Your Online Performance Coach</p>
+            <h1 className="text-4xl font-bold text-white">Welcome to your AI Sports Performance Coach</h1>
+            <p className="text-stone-200"> The all-in-one coach for improving physical and mental performance</p>
             <Button asChild>
               <Link href="/chat">Go to Chat</Link>
             </Button>
           </div>
           
-          {/* Down Arrow */}
+          {/* Down Arrow & autoscroll*/}
           <div className="relative z-10 pb-25">
             <div className="flex w-screen items-center justify-center">
               <Button
@@ -58,9 +57,10 @@ export default function Home() {
         </div>
 
   {/* Info section */}
-  <div className="relative min-h-screen bg-gradient-to-t from-[#90D5FF] to-[#DB73FF] p-8" id="info">
+  <div className="relative min-h-screen bg-gradient-to-t from-blue-500 to-blue-400 p-3" id="info">
 
     <div className="flex justify-center pt-15 pb-15">
+      { /* Clicking up button scrolls back up to welcome screen */}
       <Button
         onClick={() => {
           const targetElement = document.getElementById("welcome")
@@ -85,22 +85,22 @@ export default function Home() {
         
         {/* Features Boxes */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Box 1 */}
+          {/* Read data */}
           <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
             <h3 className="mb-3 text-xl font-bold text-white">Read WHOOP Data</h3>
             <div className="mb-3 h-0.5 bg-gradient-to-r from-purple-400 to-transparent" />
             <p className="text-stone-100">Sync your WHOOP device to provide our AI Agent with real-time recovery, sleep, workout, and strain data, enabling personalized feedback</p>
           </div>
 
-          {/* Box 2 */}
+          {/* support health */}
           <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
             <h3 className="mb-3 text-xl font-bold text-white">Support Mental & Physical Health</h3>
-            <div className="mb-3 h-0.5 bg-gradient-to-r from-blue-400 to-transparent" />
+            <div className="mb-3 h-0.5 bg-gradient-to-r from-yellow-400 to-transparent" />
             <p className="text-stone-100">Receive AI-guided insights to optimize sleep, recovery, and training, helping athletes stay balanced and perform at their best.
             </p>
           </div>
 
-          {/* Box 3 */}
+          {/* personalized feedback */}
           <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
             <h3 className="mb-3 text-xl font-bold text-white">Personalized Coaching Feedback</h3>
             <div className="mb-3 h-0.5 bg-gradient-to-r from-teal-400 to-transparent" />

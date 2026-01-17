@@ -6,7 +6,6 @@ import { randomBytes } from "crypto";
 export async function GET(){
     const { WHOOP_CLIENT_ID: clientId, WHOOP_REDIRECT_URI: redirectUri} = process.env;
 
-    //makesure our id and our returnpoint pass correctly
     if(!clientId || !redirectUri){
         return NextResponse.json({ error: "Missing Dev Whoop Credentials (incorrect uri/clientid)" }, { status: 500 });
     }
@@ -25,7 +24,7 @@ export async function GET(){
 
     const response = NextResponse.redirect(`https://api.prod.whoop.com/oauth/oauth2/auth?${params}`);
     
-    //store state -- ensure oauth comes from us
+    //store state -- ensure oauth comes from us (csrf)
     response.cookies.set("whoop_oauth_state", state, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",

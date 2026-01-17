@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 //container to manage user login 
 
-//current login status of user
 interface AuthStatus {
   authenticated: boolean;
   user?: {
@@ -14,7 +13,7 @@ interface AuthStatus {
   };
 }
 
-//states & actions
+//state
 interface AuthContextType {
   authStatus: AuthStatus;
   checkingAuth: boolean;
@@ -26,11 +25,10 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    //default login to false
   const [authStatus, setAuthStatus] = useState<AuthStatus>({ authenticated: false });
   const [checkingAuth, setCheckingAuth] = useState(true);
 
-  //grab login status from api
+  //get login status
   async function refreshAuth() {
     try {
       const res = await fetch("/api/whoop/status");
@@ -43,13 +41,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  //delete cookie on logout
   function logout() {
     document.cookie = "whoop_access_token=; Max-Age=0; path=/";
     setAuthStatus({ authenticated: false });
   }
 
-  //when website loads, quickly check if user is logged in
+  //when website loads check if user is logged in
   useEffect(() => {
     refreshAuth();
   }, []);
