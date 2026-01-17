@@ -88,9 +88,9 @@ export default function Page() {
     }
 
     return (
-        <div className="bg-blue-300" id="background">
+        <div className="h-[calc(100vh-64px)] overflow-hidden bg-blue-300" id="background">
             {/* TODO: Bruh how do i make this look good gradient looks so ai ^*/}
-            <div className="mx-auto flex h-195 max-w-4xl flex-col bg-stone-100" id="chat-holder">
+            <div className="mx-auto flex h-full max-w-4xl flex-col bg-stone-100" id="chat-holder">
                 {/* Messages area*/}
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
                     {messages.length === 0 && !authStatus.authenticated && (
@@ -152,7 +152,7 @@ export default function Page() {
                 </div>
 
                 {/* User input Box */}
-                <div className="border-t border-stone-700 bg-stone-800 p-4">
+                <div className="flex-shrink-0 border-t border-stone-700 bg-stone-800 p-4 w-full">
                     <div className="max-w-4xl mx-auto flex gap-2">
                         <Input 
                             className="flex-1 bg-stone-700 text-white border-stone-600"
