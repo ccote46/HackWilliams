@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 //once the user accepts authentication they are sent here
 export async function GET(req: NextRequest){
-    //look thru returned url and grab code and state (and error if there is one)
     const { searchParams } = req.nextUrl;
     const code = searchParams.get("code");
     const state = searchParams.get("state");
@@ -41,7 +40,7 @@ export async function GET(req: NextRequest){
             return NextResponse.json({ error: "Couldn't get token! "}, { status: 400 });
         }
 
-        //if we get a token, send it to frontend & delete oauth cookie, and store new token in a cookie
+        //if token delete oauth cookie store new token in cookie
         const response = NextResponse.redirect(`${req.nextUrl.origin}?authenticated=true`);
         response.cookies.delete("whoop_oauth_state");
         response.cookies.set("whoop_access_token", tokens.access_token, {

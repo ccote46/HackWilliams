@@ -33,9 +33,8 @@ async function getWhoopData(token: string) {
     };
 }
 
-//format raw WHOOP data for something readable & usable by our ai agent
+//format raw WHOOP data for readable by chat
 function formatData(data: any) {
-    //if no profile
     if(!data?.profile) return "\n WHOOP not connected";
 
     let biometrics = `
