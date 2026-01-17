@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
 
-    <div id="app contianer">
+    <div id="app-container">
 
         <div className="relative flex min-h-screen flex-col" id="welcome">
           {/* Canvas background */}
@@ -71,7 +71,7 @@ export default function Home() {
       > 
         <Image 
           src="/icons8-collapse-arrow-100.png"
-          alt="Scroll Down"
+          alt="Scroll Up"
           width={50}
           height={50}
           className="animate-pulse"
@@ -116,7 +116,7 @@ export default function Home() {
             <div className="mb-3 h-0.5 bg-gradient-to-r from-green-300 to-transparent" />
             <p className="text-stone-100">
               This project was built in 24 hours for the Williams College's HackWilliams Hackathon. It uses React, Tailwind, and TypeScript to run the Frontend and Backend.
-              It connects to the WHOOP API using secure user credentials, and combines biometric data witth user chats (as well as a custom prompt + context window)
+              It connects to the WHOOP API using secure user credentials, and combines biometric data with user chats (as well as a custom prompt + context window)
               to generate responses from OpenAI's ChatGPT 4o-mini API.
             </p>
             <p className="text-stone-100 pt-3">
